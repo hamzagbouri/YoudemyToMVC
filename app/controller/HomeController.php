@@ -1,14 +1,15 @@
 <?php
 namespace App\controller;
 use App\core\Controller;
+use App\Model\Categorie;
+use App\Model\Cours;
 
 class HomeController extends Controller {
     public function index() {
-        $data = [
-            'title' => 'Welcome'
-        ];
-
-        $this->view('client/index', $data);
+        $date = [];
+      $data[] = Cours::afficherDeux();
+      $data[] = Categorie::getAll();
+      $this->view('client/index', $data);
     }
     public function login() {
         $data = [

@@ -1,8 +1,9 @@
 <?php
 namespace App\Model;
 
-require_once 'database.php';
-
+use App\Model\Database;
+use PDO;
+use PDOException;
 class Tag {
     private $id;
     private $titre;

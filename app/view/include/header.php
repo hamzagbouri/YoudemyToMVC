@@ -57,10 +57,10 @@
                             {
                                 if($_SESSION['role'] == 'etudiant')
                                 {
-                                    echo "<a href='/Youdemy-MVC/etudiant/cours'
+                                    echo "<a href='/Youdemy-MVC/etudiant/'
                             class='text-gray-900 hover:text-blue-500 transition-colors'>Mes Cours</a>";
                                 } else {
-                                    echo "<a href='/Youdemy-MVC/enseignant/cours'
+                                    echo "<a href='/Youdemy-MVC/enseignant/'
                             class='text-gray-900 hover:text-blue-500 transition-colors'>Mes Cours end</a>";
 
                                 }
@@ -75,18 +75,18 @@
                        ?>
                         <button
                             class="p-2 px-4 bg-primary text-white rounded-full hover:bg-white hover:text-primary hover:border hover:border-secondary transition-colors">
-                            <a href="/Youdemy-MVC/auth/login">Login</a>
+                            <a href="/Youdemy-MVC/home/login">Login</a>
                         </button>
                         <button
                             class="p-2 px-4 bg-primary text-white rounded-full hover:bg-white hover:text-primary hover:border hover:border-secondary transition-colors">
-                            <a href="/Youdemy/auth/singup">Register</a>
+                            <a href="/Youdemy-mvc/home/signup">Register</a>
                         </button>
                         <?php
                        } else {
                         ?>
                          <button
                             class="p-2 px-4 bg-primary text-white rounded-full hover:bg-white hover:text-primary hover:border hover:border-secondary transition-colors">
-                            <a href="/Youdemy/app/actions/login/login.php?logout">Logout</a>
+                            <a href="/Youdemy-mvc/auth/logout">Logout</a>
                         </button>
                         <?php
                        }

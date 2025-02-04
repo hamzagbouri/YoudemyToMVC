@@ -11,12 +11,19 @@ class Core {
        $url = $this->getUrl();
 
         // Look in controllers for first value
-        if(isset($url[0]) && file_exists('../app/controller/' . ucwords($url[0]). 'Controller.php')){
+        if(isset($url[0]) ){
             // If exists, set as controller
+            if(file_exists('../app/controller/' . ucwords($url[0]). 'Controller.php'))
+            {
+                $this->currentController = ucwords($url[0])."Controller";
+                // Unset 0 Index
+                unset($url[0]);
 
-            $this->currentController = ucwords($url[0])."Controller";
-            // Unset 0 Index
-            unset($url[0]);
+            }else {
+                $this->currentController = 'NotFoundController';
+
+            }
+
         }
 
         // Require the controller
@@ -27,13 +34,18 @@ class Core {
         $this->currentController = new $controllerClass();
 
         // Check for second part of url
-        if(isset($url[1])){
-            // Check to see if method exists in controller
-            if(method_exists($this->currentController, $url[1])){
+        if (isset($url[1])  ) {
+            if( method_exists($this->currentController, $url[1]))
+            {
                 $this->currentMethod = $url[1];
-                // Unset 1 index
                 unset($url[1]);
+            } else {
+
+                require_once '../app/controller/NotFoundController.php';
+                $this->currentController = new \App\Controller\NotFoundController();
+                $this->currentMethod = 'index';
             }
+
         }
         if(isset($url[2])){
             // Check to see if method exists in controller

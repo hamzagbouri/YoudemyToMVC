@@ -39,7 +39,7 @@ require_once __DIR__ ."./include/head.php";
 
         <p class="text-center text-gray-600 mt-4">
             Already have an account?
-            <a href="./login.php" class="text-black hover:underline text-black">Login</a>
+            <a href="/Youdemy-mvc/home/login" class="text-black hover:underline text-black">Login</a>
         </p>
     </div>
 </section>

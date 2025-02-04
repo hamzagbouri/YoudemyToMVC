@@ -2,7 +2,7 @@
 namespace App\Model;
 
 trait traitSignup {
-    public static function signup($nom, $email, $password, $role, $active = 1) {
+    public static function signup($nom, $email, $password, $role, $active = true) {
         $pdo = Database::getInstance()->getConnection();
 
         $stmt = $pdo->prepare('SELECT COUNT(*) FROM "user" WHERE email = :email');
@@ -14,7 +14,7 @@ trait traitSignup {
             return false; 
         }
 
-       
+
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
         $stmt = $pdo->prepare('INSERT INTO "user" (fullName, email, password, role, active, banned) VALUES (:nom, :email, :password, :role, :active, false)');
         $stmt->bindParam(':nom', $nom);

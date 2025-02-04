@@ -1,13 +1,12 @@
 <?php
 namespace App\controller;
 use App\core\Controller;
+use App\Model\Categorie;
 
 class EtudiantController extends Controller {
     public function index() {
-        $data = [
-            'title' => 'Welcome'
-        ];
-        
+        $data = [];
+        $data [] = Categorie::getAll();
         $this->view('client/etudiant/index', $data);
     }
     public function add()

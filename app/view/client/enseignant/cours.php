@@ -17,7 +17,7 @@
                     </div>
                     <span class="text-sm text-gray-500">Total Étudiants</span>
                 </div>
-                <h3 class="text-3xl font-bold text-gray-800"><?php echo $totalInscription['totalInscriptions'] ?? 0?></h3>
+                <h3 class="text-3xl font-bold text-gray-800"><?php echo  0?></h3>
                 <p class="text-green-500 text-sm mt-2 flex items-center">
                     <i class="ri-arrow-up-line mr-1"></i>
                     +12.5% ce mois
@@ -32,7 +32,7 @@
                     </div>
                     <span class="text-sm text-gray-500">Total Cours</span>
                 </div>
-                <h3 class="text-3xl font-bold text-gray-800"><?php echo $totalCours['totalCours'] ?? 0?></h3>
+                <h3 class="text-3xl font-bold text-gray-800"><?php echo  0?></h3>
                 <p class="text-green-500 text-sm mt-2 flex items-center">
                     <i class="ri-arrow-up-line mr-1"></i>
                     +5.3% ce mois
@@ -83,9 +83,17 @@
     <div class="py-10 md:px-12 px-6">
         <button
             class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition"
-            onclick="toggleModal(true)">
-            Add Course
+            onclick="toggledModal(true)">
+            Add Coursesss
         </button>
+<script>
+    function toggleModal(show) {
+        console.log("aaaa")
+        const modal = document.getElementById('addCourseModal');
+        modal.classList.toggle('hidden', !show);
+    }
+
+</script>
 
         <!-- Existing Course Card -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -285,9 +293,5 @@
         </div>
     </div>
 </section>
+<script src="cour.js"></script>
 
-
-
-<script src = "cours.js">
-
-</script>

@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
-
+use PDO;
+use PDOException;
 session_start();
 require_once 'database.php';
 
@@ -75,7 +76,7 @@ class User {
     public static function afficherTout()
     {
         $pdo = Database::getInstance()->getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM user"); 
+        $stmt = $pdo->prepare('SELECT * FROM "user" ');
         $stmt->execute();
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $userList = [];
@@ -120,7 +121,7 @@ class User {
     
     public static function login($email, $password) {
         $pdo = Database::getInstance()->getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email");
+        $stmt = $pdo->prepare('SELECT * FROM "user" WHERE email = :email');
         $stmt->bindParam(':email', $email);
         $stmt->execute();
        
@@ -128,7 +129,7 @@ class User {
         if ($res) {
             if (password_verify($password, $res['password'])) {
                 if ($res['role'] == 'enseignant') {
-                    $user = new Enseignant($res['id'], $res['fullName'], $res['email'], $res['password'], $res['role'],$res['banned'], $res['active']);
+                    $user = new Enseignant($res['id'], $res['fullname'], $res['email'], $res['password'], $res['role'],$res['banned'], $res['active']);
                    
                 } elseif ($res['role'] == 'etudiant') {
                   $user = new Etudiant($res['id'], $res['fullName'], $res['email'], $res['password'], $res['role'],$res['banned']);

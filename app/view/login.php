@@ -65,7 +65,7 @@ require_once __DIR__ ."./include/head.php";
 
         <p class="text-center text-gray-600  mt-4">
             Don't have an account?
-            <a href="./register.php" class="text-black hover:underline">Register</a>
+            <a href="/Youdemy-mvc/home/signup" class="text-black hover:underline">Register</a>
         </p>
     </div>
 </section>

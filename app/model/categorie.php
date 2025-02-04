@@ -1,7 +1,8 @@
 <?php
 namespace App\Model;
 use App\Model\Database;
-
+use PDO;
+use PDOException;
 class Categorie {
     private $id;
     private $titre;

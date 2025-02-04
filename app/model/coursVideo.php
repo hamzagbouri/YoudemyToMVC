@@ -1,7 +1,9 @@
 <?php
 namespace App\Model;
 
-require_once 'cours.php';
+use App\Model\Cours;
+use PDOException;
+use PDO;
 class CoursVideo extends Cours{
     private $video_url;
     public function __construct($id = null, $titre = null, $description = null, $id_categorie = null, $image_path = null, $video_url = null,$enseignant_id = null,$type=null,$status=null) {

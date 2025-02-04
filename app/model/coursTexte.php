@@ -1,8 +1,10 @@
 <?php
 namespace App\Model;
 
-require_once 'cours.php';
-require_once 'database.php';
+use App\Model\Cours;
+use App\Model\Database;
+use PDOException;
+use PDO;
 class CoursTexte extends Cours{
     private $contenue;
 
