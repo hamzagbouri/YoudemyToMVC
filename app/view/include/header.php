@@ -46,7 +46,7 @@
                     <img class="w-32 h-16" src="/Youdemy/public/assets/images/logo-youdemy.png" alt="Youdemy Platform">
                     </a>
                     <nav class="hidden md:flex items-center space-x-6">
-                        <a href="/Youdemy/public/index.php" class="text-gray-900 hover:text-blue-500 transition-colors">Home</a>
+                        <a href="admin/test" class="text-gray-900 hover:text-blue-500 transition-colors">Home</a>
                         <a href="/Youdemy/public/cours.php"
                             class="text-gray-900 hover:text-blue-500 transition-colors">Cours</a>
                         <a href="#"
@@ -110,3 +110,4 @@
                 </div>
             </div>
         </header>
+</div>
