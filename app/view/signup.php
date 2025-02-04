@@ -5,7 +5,7 @@ require_once __DIR__ ."./include/head.php";
     class="hero bg-blue-500/5 flex-grow flex justify-center items-center border-blue-400 bg-opacity-20 bg-cover bg-center">
     <div class="bg-white/10 backdrop-blur-lg rounded-lg p-8 shadow-lg w-full max-w-md">
         <h2 class="text-blue-400 text-center text-3xl font-semibold mb-6">Register</h2>
-        <form method="post" action="/Youdemy-mvc/auth/login" name="signup-form" id="registerForm" enctype="multipart/form-data">
+        <form method="post" action="/Youdemy-mvc/auth/signup" name="signup-form" id="registerForm" enctype="multipart/form-data">
             <div class="relative mb-4">
                 <i class="ri-user-line text-gray-300 absolute left-4 top-2.5 text-xl"></i>
                 <input type="text" placeholder="Username" name="fullName-signup" id="username" required
