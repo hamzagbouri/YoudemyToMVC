@@ -7,9 +7,22 @@ class HomeController extends Controller {
         $data = [
             'title' => 'Welcome'
         ];
-        
+
         $this->view('client/index', $data);
     }
-    
+    public function login() {
+        $data = [
+            'title' => 'Welcome'
+        ];
+
+        $this->view('login', $data);
+    }
+    public function signup() {
+        $data = [
+            'title' => 'Welcome'
+        ];
+
+        $this->view('signup', $data);
+    }
 }
 ?>

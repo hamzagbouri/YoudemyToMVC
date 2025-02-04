@@ -42,12 +42,12 @@
 <header class="border-b bg-white">
             <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between py-4">
-                    <a href="/Youdemy/public/index.php">
+                    <a href="/Youdemy-MVC/">
                     <img class="w-32 h-16" src="/Youdemy/public/assets/images/logo-youdemy.png" alt="Youdemy Platform">
                     </a>
                     <nav class="hidden md:flex items-center space-x-6">
-                        <a href="admin/test" class="text-gray-900 hover:text-blue-500 transition-colors">Home</a>
-                        <a href="/Youdemy/public/cours.php"
+                        <a href="/Youdemy-MVC/" class="text-gray-900 hover:text-blue-500 transition-colors">Home</a>
+                        <a href="/Youdemy-MVC/cours"
                             class="text-gray-900 hover:text-blue-500 transition-colors">Cours</a>
                         <a href="#"
                             class="text-gray-900 hover:text-blue-500 transition-colors">Contact</a>
@@ -57,10 +57,10 @@
                             {
                                 if($_SESSION['role'] == 'etudiant')
                                 {
-                                    echo "<a href='etudiant/cours.php'
+                                    echo "<a href='/Youdemy-MVC/etudiant/cours'
                             class='text-gray-900 hover:text-blue-500 transition-colors'>Mes Cours</a>";
                                 } else {
-                                    echo "<a href='enseignant/cours.php'
+                                    echo "<a href='/Youdemy-MVC/enseignant/cours'
                             class='text-gray-900 hover:text-blue-500 transition-colors'>Mes Cours end</a>";
 
                                 }
@@ -75,11 +75,11 @@
                        ?>
                         <button
                             class="p-2 px-4 bg-primary text-white rounded-full hover:bg-white hover:text-primary hover:border hover:border-secondary transition-colors">
-                            <a href="/Youdemy/public/login.php">Login</a>
+                            <a href="/Youdemy-MVC/auth/login">Login</a>
                         </button>
                         <button
                             class="p-2 px-4 bg-primary text-white rounded-full hover:bg-white hover:text-primary hover:border hover:border-secondary transition-colors">
-                            <a href="/Youdemy/public/register.php">Register</a>
+                            <a href="/Youdemy/auth/singup">Register</a>
                         </button>
                         <?php
                        } else {
@@ -110,4 +110,3 @@
                 </div>
             </div>
         </header>
-</div>
