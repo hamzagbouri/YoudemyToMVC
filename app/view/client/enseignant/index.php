@@ -99,77 +99,78 @@ require_once __DIR__ ."./../../include/head.php";
         <!-- Existing Course Card -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            <div class="group relative bg-white border border-blue-200 rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300">
-                <!-- Course Image Container -->
-                <div class="relative">
-                    <img
-                            src="../"
-                            alt="Course Image"
-                            class="w-full h-48 object-cover"
-                    >
-                    <!-- Overlay Actions -->
-                    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
-                        <a
-                                href="../viewCours.php?coursId="
-                                class="bg-white text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors">
-                            <i class="ri-eye-line text-xl"></i>
-                        </a>
-                        <button
-                                onclick="confirmDelete()"
-                                class="bg-white text-red-500 p-2 rounded-full hover:bg-red-50 transition-colors">
-                            <i class="ri-delete-bin-line text-xl"></i>
-                        </button>
+            <?php foreach($data[1] as $courItem) { ?>
+                <div class="group relative bg-white border border-blue-200 rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <!-- Course Image Container -->
+                    <div class="relative">
+                        <img
+                                src="../<?php echo $courItem->getImagePath();?>"
+                                alt="Course Image"
+                                class="w-full h-48 object-cover"
+                        >
+                        <!-- Overlay Actions -->
+                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                            <a
+                                    href="../viewCours.php?coursId=<?php echo $courItem->getId();?>"
+                                    class="bg-white text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors">
+                                <i class="ri-eye-line text-xl"></i>
+                            </a>
+                            <button
+                                    onclick="confirmDelete(<?php echo $courItem->getId();?>)"
+                                    class="bg-white text-red-500 p-2 rounded-full hover:bg-red-50 transition-colors">
+                                <i class="ri-delete-bin-line text-xl"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Course Content -->
-                <div class="p-5">
-                    <!-- Course Status Badge -->
-                    <div class="flex justify-between items-center mb-3">
+                    <!-- Course Content -->
+                    <div class="p-5">
+                        <!-- Course Status Badge -->
+                        <div class="flex justify-between items-center mb-3">
                 <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full">
-                   aaaaa
+                    <?php echo ($courItem->getStatus()) ?>
                 </span>
-                        <span class="text-gray-500 text-sm">
+                            <span class="text-gray-500 text-sm">
                     <i class="ri-calendar-line"></i>
-                   aaaaa
+                    <?php echo date('d M, Y'); ?>
                 </span>
-                    </div>
+                        </div>
 
-                    <!-- Course Title -->
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-1">
-                        aaaaa
-                    </h3>
+                        <!-- Course Title -->
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-1">
+                            <?php echo $courItem->getTitre();?>
+                        </h3>
 
-                    <!-- Course Description -->
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                        aaaaa
-                    </p>
+                        <!-- Course Description -->
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                            <?php echo $courItem->getDescription();?>
+                        </p>
 
-                    <!-- Course Stats -->
-                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <!-- Course Stats -->
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
                 <span class="flex items-center">
                     <i class="ri-file-list-line mr-1"></i> 3 Lessons
                 </span>
-                        <span class="flex items-center">
+                            <span class="flex items-center">
                     <i class="ri-time-line mr-1"></i> 2.5 hrs
                 </span>
-                        <span class="flex items-center">
+                            <span class="flex items-center">
                     <i class="ri-group-line mr-1"></i> 7 Students
                 </span>
-                    </div>
-
-                    <!-- Course Footer -->
-                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <div class="flex items-center space-x-1">
-                            <i class="ri-star-fill text-yellow-400"></i>
-                            <span class="font-semibold">4.4</span>
-                            <span class="text-gray-500 text-sm">(128)</span>
                         </div>
-                        <span class="text-blue-600 font-semibold">Free</span>
+
+                        <!-- Course Footer -->
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                            <div class="flex items-center space-x-1">
+                                <i class="ri-star-fill text-yellow-400"></i>
+                                <span class="font-semibold">4.4</span>
+                                <span class="text-gray-500 text-sm">(128)</span>
+                            </div>
+                            <span class="text-blue-600 font-semibold">Free</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            <?php } ?>
         </div>
 
         <!-- Delete Confirmation Modal Script -->

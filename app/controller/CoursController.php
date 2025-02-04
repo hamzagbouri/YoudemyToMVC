@@ -114,4 +114,5 @@ class CoursController extends Controller
 //            echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 //        }
     }
+
 }
