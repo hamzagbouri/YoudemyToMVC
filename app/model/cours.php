@@ -5,6 +5,7 @@ use App\Model\CoursTexte;
 use App\Model\Categorie;
 use PDO;
 use PDOException;
+use App\Model\Tag;
 
 abstract class Cours  {
     protected $id;
@@ -15,6 +16,13 @@ abstract class Cours  {
     protected $enseignant_id;
     protected $status;
     protected $fullName;
+    protected $tags ;
+
+    public function getTags()
+    {
+        $tags = Tag::getAllForCours($this->id);
+        return $tags;
+    }
 
     public function __construct($id = null, $titre = null, $description = null, $id_categorie = null, $image_path = null,$enseignant_id=null,$type=null,$status = null) {
         $this->id = $id;
@@ -43,12 +51,12 @@ abstract class Cours  {
                 if($row['contenu_type'] == 'video')
                 {
                     $cour = new coursVideo($row['id'], $row['titre'], $row['description'], $row['categorie_id'], $row['image_path'] ,$row['video_url'],$row['enseignant_id'] ,$row['contenu_type'],$row['status']);
-                    $cour->setFullName($row['fullName']);
+                    $cour->setFullName($row['fullname']);
                     $coursList[]=$cour;
                 } else 
                 {
                     $cour = new coursTexte($row['id'], $row['titre'], $row['description'], $row['categorie_id'], $row['image_path'], $row['contenu'],$row['enseignant_id'] ,$row['contenu_type'],$row['status']);
-                    $cour->setFullName($row['fullName']);
+                    $cour->setFullName($row['fullname']);
                     $coursList[]=$cour;
                 }
             }
@@ -233,10 +241,10 @@ abstract class Cours  {
     try {
         $pdo = Database::getInstance()->getConnection();
 
-        $stmt = $pdo->prepare("SELECT COUNT(*) as totalCours from CoursView where status = 'Accepte' ");
+        $stmt = $pdo->prepare("SELECT COUNT(*) as totalCours from public.coursview where status = 'Accepte' ");
         $stmt->execute();
         $res = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $res['totalCours'];
+        return $res['totalcours'];
     } catch (Exception $e ) {
         return 401;
 

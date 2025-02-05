@@ -89,6 +89,7 @@ require_once __DIR__ ."./../include/head.php";
             <?php
             foreach($data[0] as $cou)
             {
+
                 if($cou instanceof coursVideo)
                 {
                     ?>
