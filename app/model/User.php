@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Model;
 use PDO;
 use PDOException;
-session_start();
-require_once 'database.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();}
+use App\Model\Database;
 
 class User {
     protected $id;

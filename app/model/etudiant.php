@@ -1,8 +1,10 @@
 <?php
 namespace App\Model;
 
-require_once 'traitSignup.php';
-require_once __DIR__ . '/User.php';
+use App\Model\User ;
+
+use PDO;
+use PDOException;
 
 class Etudiant extends User {
     use traitSignup; 
@@ -44,7 +46,7 @@ class Etudiant extends User {
     try {
         $pdo = Database::getInstance()->getConnection();
         
-        $stmt = $pdo->prepare("SELECT e.id, e.fullName, e.email,ec.date_inscription FROM etudiant_cours ec INNER JOIN user e ON ec.etudiant_id = e.id WHERE ec.cours_id = :coursId; ");
+        $stmt = $pdo->prepare('SELECT e.id, e.fullname, e.email,ec.date_inscription FROM etudiant_cours ec INNER JOIN "user" e ON ec.etudiant_id = e.id WHERE ec.cours_id = :coursId; ');
         $stmt->bindParam(':coursId', $coursId, PDO::PARAM_INT);
         $stmt->execute();
         

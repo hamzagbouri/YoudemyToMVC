@@ -47,14 +47,7 @@ class Core {
             }
 
         }
-        if(isset($url[2])){
-            // Check to see if method exists in controller
-            if(method_exists($this->currentController, $url[2])){
-                $this->currentMethod = $url[2];
-                // Unset 1 index
-                unset($url[2]);
-            }
-        }
+
 
         // Get params
         $this->params = $url ? array_values($url) : [];

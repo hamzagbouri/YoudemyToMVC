@@ -10,7 +10,8 @@
     "authors": [
         {
             "name": "Hamza GBOURI",
-            "email": "hamzagbouri2004@gmail.com"
+            "email": "hamzagbouri2004@gmail.com",
+
         }
     ],
     "minimum-stability": "dev",

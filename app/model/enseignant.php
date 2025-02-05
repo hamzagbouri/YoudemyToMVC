@@ -1,8 +1,10 @@
 <?php
 namespace App\Model;
 
-require_once __DIR__ . '/User.php';
-require_once 'traitSignup.php';
+use App\Model\User ;
+
+use PDO;
+use PDOException;
 class Enseignant extends User {
     use traitSignup; 
 

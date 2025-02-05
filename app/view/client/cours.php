@@ -131,7 +131,7 @@ require_once __DIR__ . "./../include/head.php";
                             <!-- Actions Container -->
                             <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                                 <?php if (isset($_SESSION['logged_id'])): ?>
-                                    <a href="viewCours.php?coursId=<?php echo $cou->getId(); ?>" class="text-blue-500 hover:text-blue-700 font-medium">
+                                    <a href="/Youdemy-mvc/home/viewCours/<?php echo $cou->getId(); ?>" class="text-blue-500 hover:text-blue-700 font-medium">
                                         View Course →
                                     </a>
                                 <?php else: ?>
@@ -190,7 +190,7 @@ require_once __DIR__ . "./../include/head.php";
                             </div>
                             <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                                 <?php if (isset($_SESSION['logged_id'])): ?>
-                                    <a href="viewCours.php?coursId=<?php echo $cou->getId(); ?>" class="text-blue-500 hover:text-blue-700 font-medium">
+                                    <a href="/Youdemy-mvc/home/viewCours/<?php echo $cou->getId(); ?>" class="text-blue-500 hover:text-blue-700 font-medium">
                                         View Course →
                                     </a>
                                 <?php else: ?>

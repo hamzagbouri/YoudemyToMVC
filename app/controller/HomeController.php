@@ -3,10 +3,13 @@ namespace App\controller;
 use App\core\Controller;
 use App\Model\Categorie;
 use App\Model\Cours;
-session_start();
+use App\Model\Etudiant;
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 class HomeController extends Controller {
     public function index() {
-        $date = [];
       $data[] = Cours::afficherDeux();
       $data[] = Categorie::getAll();
       $this->view('client/index', $data);
@@ -26,6 +29,21 @@ class HomeController extends Controller {
         $data[] = $totalPage;
         $this->view('client/cours', $data);
     }
+    public function viewCours($id) {
+
+        $cours = Cours::afficherParId($id);
+        if($_SESSION['role'] == 'enseignant')
+        {
+
+            $cours = Cours::afficherParIdProf($id);
+            $allEtudiants = Etudiant::getEtudiantsByCours($cours->getId());
+            if($cours->getEnseignantId() == $id)
+            {
+                $mine = true;
+            }
+        }
+        $this->view('client/viewCours', $cours);
+    }
     public function login() {
         $data = [
             'title' => 'Welcome'
@@ -39,6 +57,10 @@ class HomeController extends Controller {
         ];
 
         $this->view('signup', $data);
+    }
+    public function myfunction(...$data)
+    {
+        print_r($data);
     }
 }
 ?>
