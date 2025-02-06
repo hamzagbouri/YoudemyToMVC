@@ -40,7 +40,6 @@ class Core {
                 $this->currentMethod = $url[1];
                 unset($url[1]);
             } else {
-
                 require_once '../app/controller/NotFoundController.php';
                 $this->currentController = new \App\Controller\NotFoundController();
                 $this->currentMethod = 'index';

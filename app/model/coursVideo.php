@@ -51,7 +51,7 @@ class CoursVideo extends Cours{
     public function afficherCours() {
         echo "<div class='aspect-video bg-gray-900 relative'>
                 <video class='w-full h-full' controls>
-                    <source src='./$this->video_url' type='video/mp4'>
+                    <source src='./../../../public/$this->video_url' type='video/mp4'>
                     Your browser does not support the video tag.
                 </video>
               </div>";

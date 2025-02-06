@@ -266,7 +266,7 @@ abstract class Cours  {
     }
     public static function updateStatus($idC,$newStatus) {
         $pdo = Database::getInstance()->getConnection();
-        $stmt = $pdo->prepare("UPDATE Cours SET status = :status WHERE id = :id");
+        $stmt = $pdo->prepare("UPDATE cours SET status = :status WHERE id = :id");
         $stmt->bindParam(':status', $newStatus);
         $stmt->bindParam(':id', $idC);
 
@@ -366,7 +366,7 @@ abstract class Cours  {
             $stmt = $pdo->prepare("SELECT COUNT(*) as totalCours FROM cours");
             $stmt->execute();
             $res = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $res['totalCours'];
+            return $res['totalcours'];
         } catch (Exception $e) {
             return 401; 
         }
@@ -378,7 +378,7 @@ abstract class Cours  {
         try {
             $pdo = Database::getInstance()->getConnection();
 
-            $stmt = $pdo->prepare("SELECT count(c.id) as totalCours,ca.titre,(SELECT COUNT(*) FROM categorie) AS totalCategorie from cours c inner join categorie ca on c.categorie_id = ca.id GROUP BY c.categorie_id LIMIT 3;
+            $stmt = $pdo->prepare("SELECT count(c.id) as totalCours,ca.titre,(SELECT COUNT(*) FROM categorie) AS totalCategorie from cours c inner join categorie ca on c.categorie_id = ca.id GROUP BY c.categorie_id,ca.titre LIMIT 3;
             ");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -397,7 +397,7 @@ abstract class Cours  {
                 SELECT COUNT(*) AS totalInscription, cours.titre 
                 FROM etudiant_cours e 
                 INNER JOIN cours ON cours.id = e.cours_id 
-                GROUP BY cours_id 
+                GROUP BY e.cours_id,cours.titre  
                 ORDER BY totalInscription DESC 
                 LIMIT 1
             ");
@@ -414,9 +414,7 @@ abstract class Cours  {
         try {
             $pdo = Database::getInstance()->getConnection();
 
-            $stmt = $pdo->prepare("SELECT u.fullName, COUNT(e.id) AS totalInscriptions FROM etudiant_cours e INNER JOIN cours c ON c.id = e.cours_id INNER JOIN user u ON c.enseignant_id = u.id GROUP BY c.enseignant_id ORDER BY totalInscriptions DESC LIMIT 3;
-
-            ");
+            $stmt = $pdo->prepare('SELECT u.fullname, COUNT(e.id) AS totalInscriptions FROM etudiant_cours e INNER JOIN cours c ON c.id = e.cours_id INNER JOIN "user" u ON c.enseignant_id = u.id GROUP BY c.enseignant_id,u.fullname ORDER BY totalInscriptions DESC LIMIT 3;');
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {

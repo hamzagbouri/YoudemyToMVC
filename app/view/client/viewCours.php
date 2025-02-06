@@ -8,7 +8,7 @@ require_once __DIR__ . "./../include/head.php";
             <div class="bg-white rounded-xl shadow-lg mb-8">
                 <div class="p-8">
                     <div class="flex gap-3 mb-4">
-                        <?php $tags = $data->getTags();
+                        <?php $tags = $data['cours']->getTags();
                         foreach($tags as $tag)
                         {
                             ?>
@@ -19,36 +19,36 @@ require_once __DIR__ . "./../include/head.php";
                         }
                         ?>
                     </div>
-                    <?php if($mine): ?>
+                    <?php if($data['mine']): ?>
                         <div class="flex gap-2">
                             <button
-                                onclick="editCourse(<?php echo $data->getId(); ?>)"
+                                onclick="editCourse(<?php echo $data['cours']->getId(); ?>)"
                                 class="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">
                                 <i class="ri-edit-line"></i>
                                 Edit
                             </button>
                             <button
-                                onclick="confirmDelete(<?php echo $data->getId(); ?>)"
+                                onclick="confirmDelete(<?php echo $data['cours']->getId(); ?>)"
                                 class="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">
                                 <i class="ri-delete-bin-line"></i>
                                 Delete
                             </button>
                         </div>
                     <?php endif; ?>
-                    <h1 class="text-3xl font-bold text-gray-800 mb-4"><?php echo $data->getTitre() ?></h1>
-                    <p class="text-gray-600 text-lg mb-6"><?php echo $data->getDescription() ?>.</p>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-4"><?php echo $data['cours']->getTitre() ?></h1>
+                    <p class="text-gray-600 text-lg mb-6"><?php echo $data['cours']->getDescription() ?>.</p>
 
                     <!-- Instructor Info -->
                     <div class="flex items-center gap-4 pb-4 border-b">
                         <img src="https://placehold.co/48x48" alt="Instructor" class="w-12 h-12 rounded-full">
                         <div>
-                            <p class="font-medium text-gray-800">Dr. <?php echo $data->getFullName() ?></p>
+                            <p class="font-medium text-gray-800">Dr. <?php echo $data[0]->getFullName() ?></p>
                             <p class="text-gray-500 text-sm">Senior Web Development Instructor</p>
                         </div>
                     </div>
                 </div>
 
-                <?php  $data->afficherCours() ?>
+                <?php  $data['cours']->afficherCours() ?>
 
 
 
@@ -125,7 +125,7 @@ require_once __DIR__ . "./../include/head.php";
         </div>
     </div>
 </section>
-<?php if($mine) {?>
+<?php if($data['mine']) {?>
     <div class="p-8 border-t">
         <h2 class="text-2xl font-bold mb-6">Enrolled Students</h2>
 
@@ -139,7 +139,7 @@ require_once __DIR__ . "./../include/head.php";
 
             <!-- Table Body -->
             <div class="divide-y">
-                <?php foreach($allEtudiants as $etudiant): ?>
+                <?php foreach($data['etudiant'] as $etudiant): ?>
                     <div class="grid grid-cols-3 gap-4 p-4 items-center hover:bg-gray-50 transition-colors">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">

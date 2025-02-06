@@ -3,6 +3,7 @@
 namespace App\controller;
 
 use App\core\Controller;
+use App\Model\Cours;
 use Exception;
 use App\model\CoursTexte;
 use App\Model\CoursVideo;
@@ -113,6 +114,16 @@ class CoursController extends Controller
 //        } else {
 //            echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 //        }
+    }
+    public function updateStatus()
+    {
+        $idCours = $_POST['cours_id'];
+        if(isset($_POST['action']))
+        {
+            $newStatus = $_POST['action'];
+            $res = Cours::updateStatus($idCours,$newStatus);
+            header("Location: /youdemy-mvc/admin/cours");
+        }
     }
 
 }

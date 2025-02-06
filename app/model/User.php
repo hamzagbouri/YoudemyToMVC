@@ -88,7 +88,7 @@ class User {
                 
                 $userList[] = new Etudiant(
                     $user['id'], 
-                    $user['fullName'], 
+                    $user['fullname'],
                     $user['email'], 
                     $user['password'], 
                     $user['role'], 
@@ -98,7 +98,7 @@ class User {
             
                 $userList[] = new Enseignant(
                     $user['id'], 
-                    $user['fullName'], 
+                    $user['fullname'],
                     $user['email'], 
                     $user['password'], 
                     $user['role'], 
@@ -109,7 +109,7 @@ class User {
                 
                 $userList[] = new Admin(
                     $user['id'], 
-                    $user['fullName'], 
+                    $user['fullname'],
                     $user['email'], 
                     $user['password'], 
                     $user['banned']
@@ -134,10 +134,10 @@ class User {
                     $user = new Enseignant($res['id'], $res['fullname'], $res['email'], $res['password'], $res['role'],$res['banned'], $res['active']);
                    
                 } elseif ($res['role'] == 'etudiant') {
-                  $user = new Etudiant($res['id'], $res['fullName'], $res['email'], $res['password'], $res['role'],$res['banned']);
+                  $user = new Etudiant($res['id'], $res['fullname'], $res['email'], $res['password'], $res['role'],$res['banned']);
                 } else if ($res['role'] == 'admin')
                 {
-                    $user = new Admin($res['id'], $res['fullName'], $res['email'], $res['password'],$res['banned']);
+                    $user = new Admin($res['id'], $res['fullname'], $res['email'], $res['password'],$res['banned']);
                 }
                 $_SESSION['logged_id'] = $user->getId();
                 $_SESSION['role'] = $user->getRole();

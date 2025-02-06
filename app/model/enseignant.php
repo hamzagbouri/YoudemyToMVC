@@ -17,8 +17,9 @@ class Enseignant extends User {
 
     public static function setActive($id,$active) {
         $pdo = Database::getInstance()->getConnection();
-        $stmt = $pdo->prepare("UPDATE user SET active = :active WHERE id = :id");
-        $stmt->bindParam(':active', $active);
+        $stmt = $pdo->prepare('UPDATE "user" SET active = :active WHERE id = :id');
+
+        $stmt->bindParam(':active', $active, PDO::PARAM_BOOL);
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
@@ -35,7 +36,7 @@ class Enseignant extends User {
         try {
             $pdo = Database::getInstance()->getConnection();
 
-            $stmt = $pdo->prepare("SELECT u.fullName, COUNT(e.id) AS totalInscriptions FROM etudiant_cours e INNER JOIN cours c ON c.id = e.cours_id INNER JOIN user u ON c.enseignant_id = u.id where enseignant_id= :id GROUP BY c.enseignant_id ORDER BY totalInscriptions DESC;");
+            $stmt = $pdo->prepare('SELECT u.fullname, COUNT(e.id) AS totalInscriptions FROM etudiant_cours e INNER JOIN cours c ON c.id = e.cours_id INNER JOIN "user" u ON c.enseignant_id = u.id where enseignant_id= :id GROUP BY c.enseignant_id ORDER BY totalInscriptions DESC;');
             $stmt->bindParam(':id',$id);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);

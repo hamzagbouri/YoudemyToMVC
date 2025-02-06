@@ -30,19 +30,19 @@ class HomeController extends Controller {
         $this->view('client/cours', $data);
     }
     public function viewCours($id) {
-
-        $cours = Cours::afficherParId($id);
+        $data['mine'] = false;
+        $data[] = Cours::afficherParId($id);
         if($_SESSION['role'] == 'enseignant')
         {
 
-            $cours = Cours::afficherParIdProf($id);
-            $allEtudiants = Etudiant::getEtudiantsByCours($cours->getId());
-            if($cours->getEnseignantId() == $id)
+            $data['cours'] = Cours::afficherParIdProf($id);
+            $data['etudiant'] = Etudiant::getEtudiantsByCours($data[0]->getId());
+            if($data[0]->getEnseignantId() == $id)
             {
-                $mine = true;
+                $data['mine'] = true;
             }
         }
-        $this->view('client/viewCours', $cours);
+        $this->view('client/viewCours', $data);
     }
     public function login() {
         $data = [
