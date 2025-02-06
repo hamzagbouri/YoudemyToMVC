@@ -336,7 +336,7 @@ abstract class Cours  {
     static function afficherTousParEtudiant($idE)
     {
         $pdo = Database::getInstance()->getConnection();
-        $stmt = $pdo->prepare("SELECT c.*, u.fullName from cours c inner join etudiant_cours e on e.cours_id = c.id inner join user u on c.enseignant_id = u.id where e.etudiant_id = :id ");
+        $stmt = $pdo->prepare('SELECT c.*, u.fullname from cours c inner join etudiant_cours e on e.cours_id = c.id inner join "user" u on c.enseignant_id = u.id where e.etudiant_id = :id ');
         $stmt->bindValue(':id', $idE,PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

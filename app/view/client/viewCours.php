@@ -42,7 +42,7 @@ require_once __DIR__ . "./../include/head.php";
                     <div class="flex items-center gap-4 pb-4 border-b">
                         <img src="https://placehold.co/48x48" alt="Instructor" class="w-12 h-12 rounded-full">
                         <div>
-                            <p class="font-medium text-gray-800">Dr. <?php echo $data[0]->getFullName() ?></p>
+                            <p class="font-medium text-gray-800">Dr. <?php echo $data['cours']->getFullName() ?></p>
                             <p class="text-gray-500 text-sm">Senior Web Development Instructor</p>
                         </div>
                     </div>

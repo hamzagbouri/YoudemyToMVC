@@ -31,10 +31,9 @@ class HomeController extends Controller {
     }
     public function viewCours($id) {
         $data['mine'] = false;
-        $data[] = Cours::afficherParId($id);
+        $data['cours'] = Cours::afficherParId($id);
         if($_SESSION['role'] == 'enseignant')
         {
-
             $data['cours'] = Cours::afficherParIdProf($id);
             $data['etudiant'] = Etudiant::getEtudiantsByCours($data[0]->getId());
             if($data[0]->getEnseignantId() == $id)

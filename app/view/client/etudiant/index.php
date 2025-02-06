@@ -89,66 +89,69 @@ require_once __DIR__ ."./../../include/head.php";
                 <tbody class="bg-white divide-y divide-gray-200">
 
                 <tr class="hover:bg-gray-50 transition-colors duration-200">
-                    <!-- Course Info -->
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            <div class="h-12 w-12 flex-shrink-0">
-                                <img class="h-12 w-12 rounded-lg object-cover"
-                                     src="../aaaa"
-                                     alt="aaaa">
-                            </div>
-                            <div class="ml-4">
-                                <div class="text-sm font-medium text-gray-900">
-                                    Hazmzaa
+                    <!-- Course Info --><tbody class="bg-white divide-y divide-gray-200">
+                <?php foreach ($data as $cours): ?>
+                    <tr class="hover:bg-gray-50 transition-colors duration-200">
+                        <!-- Course Info -->
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <div class="h-12 w-12 flex-shrink-0">
+                                    <img class="h-12 w-12 rounded-lg object-cover"
+                                         src="../<?php echo htmlspecialchars($cours->getImagePath()); ?>"
+                                         alt="<?php echo htmlspecialchars($cours->getTitre()); ?>">
                                 </div>
-                                <div class="text-sm text-gray-500">
-                                    aaaa
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium text-gray-900">
+                                        <?php echo htmlspecialchars($cours->getTitre()); ?>
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        <?php echo htmlspecialchars(substr($cours->getDescription(), 0, 60)) . '...'; ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
-                    <!-- Teacher -->
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">aaaa</div>
-                    </td>
+                        <!-- Teacher -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900"><?php echo htmlspecialchars($cours->getFullName()); ?></div>
+                        </td>
 
-                    <!-- Content Type -->
-                    <td class="px-6 py-4 whitespace-nowrap">
+                        <!-- Content Type -->
+                        <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
-                            'video' === 'video'
+                            <?php echo $cours->getType() === 'video'
                             ? 'bg-purple-100 text-purple-800'
                             : 'bg-blue-100 text-blue-800'; ?>">
-                            <?php echo 'video' === 'video' ? 'video' : 'text'; ?>
+                            <?php echo $cours->getType() === 'video' ? 'video' : 'text'; ?>
                         </span>
-                    </td>
+                        </td>
 
-                    <!-- Enrollment Date -->
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                            <?php echo date('d/m/Y'); // Replace with actual enrollment date if available ?>
-                        </div>
-                    </td>
+                        <!-- Enrollment Date -->
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <?php echo date('d/m/Y'); // Replace with actual enrollment date if available ?>
+                            </div>
+                        </td>
 
-                    <!-- View Action -->
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <a href="../viewCours.php?coursId=aaaa"
-                           class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors duration-200">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                            Voir le cours
-                        </a>
-                    </td>
-                </tr>
-
+                        <!-- View Action -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <a href="/youdemy-mvc/home/viewcours/<?php echo $cours->getId(); ?>"
+                               class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors duration-200">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                                Voir le cours
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
