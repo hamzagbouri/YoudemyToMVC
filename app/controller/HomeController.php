@@ -52,13 +52,15 @@ class HomeController extends Controller {
 
 
     public function viewCours($id) {
+        $idE = $_SESSION['logged_id'];
+        $data['categorie'] = Categorie::getAll();
         $data['mine'] = false;
         $data['cours'] = Cours::afficherParId($id);
         if($_SESSION['role'] == 'enseignant')
         {
             $data['cours'] = Cours::afficherParIdProf($id);
-            $data['etudiant'] = Etudiant::getEtudiantsByCours($data[0]->getId());
-            if($data[0]->getEnseignantId() == $id)
+            $data['etudiant'] = Etudiant::getEtudiantsByCours($data['cours']->getId());
+            if($data['cours']->getEnseignantId() == $idE)
             {
                 $data['mine'] = true;
             }

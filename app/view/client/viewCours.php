@@ -144,10 +144,10 @@ require_once __DIR__ . "./../include/head.php";
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                         <span class="text-blue-600 font-medium">
-                            <?php echo substr($etudiant['fullName'], 0, 1); ?>
+                            <?php echo substr($etudiant['fullname'], 0, 1); ?>
                         </span>
                             </div>
-                            <span class="font-medium text-gray-800"><?php echo $etudiant['fullName']; ?></span>
+                            <span class="font-medium text-gray-800"><?php echo $etudiant['fullname']; ?></span>
                         </div>
                         <div class="text-gray-600"><?php echo $etudiant['email']; ?></div>
                         <div class="text-gray-600">
@@ -213,7 +213,7 @@ require_once __DIR__ . "./../include/head.php";
                     name="categorie"
                     class="block px-3 py-2 w-full mt-1 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <?php
-                    foreach($categories as $categorie)
+                    foreach($data['categorie'] as $categorie)
                     {
                         echo "<option value ='".$categorie->getId()."'>".$categorie->getTitre()."</option>";
                     }
@@ -277,7 +277,7 @@ require_once __DIR__ . "./../include/head.php";
     const selectedTagsContainer = document.getElementById('editSelectedTags');
     let selectedTags = [];
     function editCourse(courseId) {
-        fetch(`../app/actions/cours/getJson.php?coursId=${courseId}`)
+        fetch(`/youdemy-mvc/cours/afficher/${courseId}`)
             .then(response => response.json())
             .then(course => {
                 console.log(course);
@@ -299,9 +299,10 @@ require_once __DIR__ . "./../include/head.php";
             })
             .catch(err => console.error('Error fetching course details:', err));
 
-        fetch(`../app/actions/tag/getAllJson.php?coursId=${courseId}`)
+        fetch(`/youdemy-mvc/tag/afficher/${courseId}`)
             .then(response => response.json())
             .then(tags => {
+                console.log(tags)
                 selectedTags = tags;
                 updateSelectedTags(tags);
             })
@@ -310,7 +311,7 @@ require_once __DIR__ . "./../include/head.php";
 
     // Fetch tags for suggestions
     function fetchTags(query) {
-        fetch(`../app/actions/tag/getAllJson.php?query=${query}`)
+        fetch(`/Youdemy-mvc/Tag/getalljson/${query}`)
             .then(response => response.json())
             .then(tags => {
                 tagsList.innerHTML = '';
@@ -428,7 +429,7 @@ require_once __DIR__ . "./../include/head.php";
             cancelButtonText: 'Cancel'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = `../app/actions/cours/delete.php?idCours=${courseId}`;
+                window.location.href = `/youdemy-mvc/cours/supprimer/${courseId}`;
             }
         });
     }
@@ -436,7 +437,7 @@ require_once __DIR__ . "./../include/head.php";
         e.preventDefault();
         const formData = new FormData(this);
         formData.append('selectedTags', JSON.stringify(selectedTags));
-        fetch('/Youdemy/app/actions/cours/update.php', {
+        fetch('/youdemy-mvc/cours/modifier', {
             method: 'POST',
             body: formData
         })
@@ -448,7 +449,7 @@ require_once __DIR__ . "./../include/head.php";
             })
             .then(data => {
                 console.log(data);
-                window.location.href =`viewCours.php?coursId=${data['coursId']}`
+                window.location.href =`/youdemy-mvc/home/viewcours/${data['coursId']}`
 
             })
             .catch(error => {

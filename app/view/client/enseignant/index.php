@@ -111,7 +111,7 @@ require_once __DIR__ ."./../../include/head.php";
                         <!-- Overlay Actions -->
                         <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
                             <a
-                                    href="../viewCours.php?coursId=<?php echo $courItem->getId();?>"
+                                    href="/youdemy-mvc/home/viewCours/<?php echo $courItem->getId();?>"
                                     class="bg-white text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors">
                                 <i class="ri-eye-line text-xl"></i>
                             </a>
@@ -187,7 +187,7 @@ require_once __DIR__ ."./../../include/head.php";
                     cancelButtonText: 'Cancel'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = `../../app/actions/cours/delete.php?idCours=${courseId}`;
+                        window.location.href = `/youdemy-mvc/cours/supprimer/${courseId}`;
                     }
                 });
             }

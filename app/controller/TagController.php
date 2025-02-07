@@ -41,4 +41,9 @@ class TagController extends Controller
          header('Location: /youdemy-mvc/admin/tags');
 
      }
+     public function afficher($id)
+     {
+         echo json_encode(Tag::getTagsByCours($id));
+     }
+
 }
