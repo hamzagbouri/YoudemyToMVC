@@ -38,7 +38,7 @@ class Etudiant extends User {
         $stmt->bindParam(':cours_id', $coursId);
         $stmt->execute();
         $res =  $stmt->fetch(PDO::FETCH_ASSOC);
-        return $res['totalCoursEtudiant'];
+        return $res['totalcoursetudiant'];
 
     }
     public static function getEtudiantsByCours($coursId)

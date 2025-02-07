@@ -1,4 +1,7 @@
 <?php
+
+use App\Model\Etudiant;
+
 require_once __DIR__ . "./../include/head.php";
 ?>
 <section class="py-16 px-4 bg-white">
@@ -15,7 +18,7 @@ require_once __DIR__ . "./../include/head.php";
             </p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <?php foreach($data[1] as $categorie)
+            <?php foreach($data['categorie'] as $categorie)
             {
                 echo " <div
                     class='bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 hover:border-blue-400 hover:scale-105 transition-transform duration-300'>
@@ -66,10 +69,9 @@ require_once __DIR__ . "./../include/head.php";
         </h2>
         <div class="mb-10 flex justify-center">
             <div class="relative w-full max-w-lg">
-                <form action="" method="get">
+                <form id="searchForm" >
                     <input
                         name="search"
-                        onchange="this.form.submit()"
                         type="text"
                         id="searchInput"
                         placeholder="Search for a course..."
@@ -82,11 +84,21 @@ require_once __DIR__ . "./../include/head.php";
                     </svg>
                 </div>
             </div>
+
         </div>
+        <script>
+            document.getElementById('searchInput').addEventListener('change', function(){
+                const value = document.getElementById('searchInput').value.trim(); // Ensure value is retrieved properly
+                if(value !== '') { // Prevent empty submissions
+                    document.getElementById('searchForm').action = '/youdemy-mvc/home/cours/' + encodeURIComponent(value);
+                    document.getElementById('searchForm').submit();
+                }
+            });
+        </script>
         <div class="flex flex-wrap gap-6 justify-center items-center">
             <?php
 
-            foreach($data[0] as $cou)
+            foreach($data['cours'] as $cou)
             {
                 $tags = $cou->getTags();
 
@@ -97,7 +109,7 @@ require_once __DIR__ . "./../include/head.php";
                     <div class="bg-white rounded-2xl w-[30%] shadow-lg overflow-hidden transform transition-transform hover:scale-[1.02] hover:shadow-xl">
                         <div class="relative">
                             <div class="">
-                                <img src="./../public/<?php echo $cou->getImagePath() ?>" alt="Course thumbnail" class="">
+                                <img src="/youdemy-mvc/public/<?php echo $cou->getImagePath() ?>" alt="Course thumbnail" class="">
                             </div>
                             <div class="absolute top-4 right-4">
                                         <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-md">
@@ -140,7 +152,7 @@ require_once __DIR__ . "./../include/head.php";
                                     </a>
                                 <?php endif; ?>
 
-                                <?php if(isset($isEtudiant) && $isEtudiant && (coursEtudiant::checkInscription($cou->getId(),$idLog) == 0 )): ?>
+                                <?php  if( $data['$isEtudiant'] && Etudiant::checkCourse($data['$idLog'],$cou->getId()) == 0 ): ?>
                                     <button
                                         onclick="confirmInscription(<?php echo $cou->getId();?>)"
                                         class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center gap-2">
@@ -157,7 +169,7 @@ require_once __DIR__ . "./../include/head.php";
                     <div class="bg-white rounded-2xl w-[30%] shadow-lg overflow-hidden transform transition-transform hover:scale-[1.02] hover:shadow-xl">
                         <div class="relative">
                             <div class="">
-                                <img src="./../public/<?php echo $cou->getImagePath() ?> " alt="">
+                                <img src="/youdemy-mvc/public/<?php echo $cou->getImagePath() ?> " alt="<?php echo $cou->getImagePath() ?> ">
                             </div>
                             <div class="absolute top-4 right-4">
                             <span class="bg-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-md">
@@ -199,7 +211,7 @@ require_once __DIR__ . "./../include/head.php";
                                     </a>
                                 <?php endif; ?>
 
-                                <?php if(isset($isEtudiant) && $isEtudiant && (coursEtudiant::checkInscription($cou->getId(),$idLog) == 0 )): ?>
+                                <?php  if( $data['$isEtudiant'] && Etudiant::checkCourse($data['$idLog'],$cou->getId()) == 0 ): ?>
                                     <button
                                         onclick="confirmInscription(<?php echo $cou->getId();?>)"
                                         class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center gap-2">
@@ -222,13 +234,32 @@ require_once __DIR__ . "./../include/head.php";
     </div>
     <div class="flex w-full justify-center items-center gap-2">
         <?php
-        for($i =1;$i<=$data[2];$i++)
-            echo " <a href='cours.php?page=$i' class='py-1 px-3 rounded-xl hover:bg-blue-500 hover:text-white  border'>$i</a>
+        for($i =1;$i<=$data['totalpage'];$i++)
+            echo " <a href='/youdemy-mvc/home/cours/$i' class='py-1 px-3 rounded-xl hover:bg-blue-500 hover:text-white  border'>$i</a>
 "
         ?>
 
     </div>
 </section>
+<script >
+    function confirmInscription(courseId) {
+        Swal.fire({
+            title: 'Confirmer l\'inscription',
+            text: "Voulez-vous vous inscrire à ce cours ?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, je m\'inscris!',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Perform the inscription
+                window.location.href = `/youdemy-mvc/etudiant/inscrire/${courseId}`;
+            }
+        });
+    }
+</script>
 <?php
 require_once __DIR__ . "./../include/footer.php";
 ?>

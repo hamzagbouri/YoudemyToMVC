@@ -14,21 +14,43 @@ class HomeController extends Controller {
       $data[] = Categorie::getAll();
       $this->view('client/index', $data);
     }
-    public function cours() {
-        $isEtudiant = false;
-        if(isset($_SESSION['role']) && $_SESSION['role'] == 'etudiant' )
-        {
-            $isEtudiant = true;
-            $idLog = $_SESSION['logged_id'];
+    public function cours($page = 0) {
+        $data['$isEtudiant'] = false;
+        $start = null;
+        $search = null;
+
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'etudiant') {
+            $data['$isEtudiant'] = true;
+            $data['$idLog'] = $_SESSION['logged_id'];
+
         }
-        $date = [];
-        $data[] = Cours::afficherCoursPagination(0);
-        $data[] = Categorie::getAll();
-        $totalCours = Cours::totalCours();
+
+        if ($page != 0) {
+            if (ctype_digit($page) && intval($page) > 0) {
+                $start = (intval($page) - 1) * 6;
+            } else {
+                $start = 0;
+                $search = $page;
+            }
+        }
+
+        if ($search) {
+            $data['cours'] = Cours::searchCours($search);
+            $totalCours = count($data['cours']);
+        } else {
+            $data['cours'] = Cours::afficherCoursPagination($start);
+            $totalCours = Cours::totalCours();
+        }
+
         $totalPage = ceil($totalCours / 6);
-        $data[] = $totalPage;
+
+        $data['categorie'] = Categorie::getAll();
+        $data['totalpage'] = $totalPage;
+
         $this->view('client/cours', $data);
     }
+
+
     public function viewCours($id) {
         $data['mine'] = false;
         $data['cours'] = Cours::afficherParId($id);

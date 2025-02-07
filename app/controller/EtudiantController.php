@@ -20,6 +20,12 @@ class EtudiantController extends Controller {
         print_r($content);
 
     }
+    public function inscrire($courseId)
+    {
+        $idS = $_SESSION['logged_id'];
+        Etudiant::joinCourse($idS,$courseId);
+        header('Location: /youdemy-mvc/etudiant');
+    }
     
 }
 ?>
